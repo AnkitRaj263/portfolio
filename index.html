@@ -1,27 +1,574 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Ankit Raj </title>
-<link rel="stylesheet" href="style.css">
-</head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ankit Raj — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --bg3: #1a1a1a;
+  --text: #f0f0f0;
+  --muted: #a0a0a0;
+  --accent: #4d9fff;
+  --accent-light: #0d1f3c;
+  --border: #2e2e2e;
+  --sans: 'DM Sans', sans-serif;
+  --serif: 'DM Serif Display', serif;
+  --radius: 14px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #000000;
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 99px; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.1rem 5%;
+  background: rgba(5,5,5,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: var(--serif); font-size: 1.3rem; color: var(--text); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--muted); font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--accent); }
+
+.container { max-width: 1080px; margin: 0 auto; padding: 0 5%; }
+section { padding: 6rem 0; }
+
+/* SECTION LABELS */
+.tag {
+  display: inline-block;
+  background: #0d1f3c;
+  color: #4d9fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.9rem;
+  border-radius: 99px;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 3.5rem;
+}
+.section-title em { font-style: italic; color: var(--muted); }
+
+/* ─── HERO ─── */
+#hero { min-height: 100vh; display: flex; align-items: center; padding-top: 5rem; }
+.hero-inner {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 4rem; width: 100%;
+}
+.hero-left { flex: 1; }
+.hero-greeting {
+  font-size: 0.9rem; font-weight: 500; color: var(--muted);
+  margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+}
+.hero-greeting::before {
+  content: ''; display: inline-block;
+  width: 28px; height: 2px; background: var(--accent);
+}
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3.2rem, 7vw, 5.5rem);
+  line-height: 1.05; color: var(--text); margin-bottom: 1.2rem;
+}
+.hero-name span { color: var(--accent); font-style: italic; }
+.hero-role {
+  font-size: 1.05rem; color: var(--muted); font-weight: 400;
+  margin-bottom: 2rem; max-width: 500px; line-height: 1.8;
+}
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  background: #4d9fff; color: #000; padding: 0.8rem 2rem;
+  border-radius: 99px; text-decoration: none; font-size: 0.88rem;
+  font-weight: 500; transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: #3b8fe8; transform: translateY(-2px); }
+.btn-outline {
+  background: transparent; color: var(--text); padding: 0.8rem 2rem;
+  border-radius: 99px; border: 1.5px solid var(--border);
+  text-decoration: none; font-size: 0.88rem; font-weight: 500;
+  transition: border-color 0.2s, color 0.2s, transform 0.15s;
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+/* HERO PHOTO */
+.hero-photo-wrap {
+  position: relative; flex-shrink: 0; width: 340px; height: 340px;
+}
+.hero-photo-bg {
+  position: absolute; inset: 0;
+  border-radius: 40% 60% 55% 45% / 45% 45% 55% 55%;
+  background: #1c1c1c; animation: blob 8s ease-in-out infinite;
+}
+@keyframes blob {
+  0%,100% { border-radius: 40% 60% 55% 45% / 45% 45% 55% 55%; }
+  33% { border-radius: 55% 45% 40% 60% / 55% 45% 55% 45%; }
+  66% { border-radius: 45% 55% 60% 40% / 55% 55% 45% 45%; }
+}
+.hero-photo {
+  position: absolute; inset: 12px; border-radius: 40% 60% 55% 45% / 45% 45% 55% 55%;
+  object-fit: cover; animation: blob 8s ease-in-out infinite;
+}
+.hero-photo-placeholder {
+  position: absolute; inset: 12px;
+  border-radius: 40% 60% 55% 45% / 45% 45% 55% 55%;
+  background: #1a1a1a;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.5rem; color: var(--muted); font-size: 0.82rem; font-weight: 500;
+  animation: blob 8s ease-in-out infinite;
+}
+.hero-photo-placeholder svg { opacity: 0.35; }
+
+/* HERO STATS */
+.hero-stats {
+  display: flex; gap: 2.5rem; margin-top: 3rem;
+  padding-top: 2rem; border-top: 1px solid var(--border);
+}
+.stat-num { font-family: var(--serif); font-size: 2rem; color: var(--text); line-height: 1; }
+.stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+/* FADE IN */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-greeting { animation: fadeUp 0.5s 0.1s ease both; }
+.hero-name { animation: fadeUp 0.5s 0.2s ease both; }
+.hero-role { animation: fadeUp 0.5s 0.3s ease both; }
+.hero-btns { animation: fadeUp 0.5s 0.4s ease both; }
+.hero-stats { animation: fadeUp 0.5s 0.5s ease both; }
+
+/* ─── ABOUT ─── */
+#about { background: #111111; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.about-text { font-size: 1rem; color: var(--muted); line-height: 1.85; }
+.about-text p + p { margin-top: 1.2rem; }
+.edu-list { display: flex; flex-direction: column; gap: 1rem; }
+.edu-card {
+  background: #0a0a0a; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.2rem 1.5rem;
+}
+.edu-degree { font-weight: 600; font-size: 0.95rem; color: var(--text); }
+.edu-school { font-size: 0.85rem; color: #4d9fff; margin-top: 0.2rem; }
+.edu-meta { font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem; }
+
+/* ─── SKILLS ─── */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+.skill-cat {
+  background: #111111; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.5rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.skill-cat:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+.skill-cat-title {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.skill-tag {
+  background: #0a0a0a; border: 1px solid var(--border); color: var(--text);
+  font-size: 0.82rem; font-weight: 500; padding: 0.3rem 0.8rem; border-radius: 99px;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.skill-tag:hover { background: #0d1f3c; border-color: #4d9fff; color: #4d9fff; }
+
+/* ─── PROJECTS ─── */
+#projects { background: #111111; }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+.project-card {
+  background: #0a0a0a; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 2rem; display: flex; flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(77,159,255,0.12); }
+.project-date { font-size: 0.78rem; font-weight: 500; color: var(--muted); margin-bottom: 0.6rem; }
+.project-title { font-family: var(--serif); font-size: 1.3rem; color: var(--text); margin-bottom: 1rem; line-height: 1.3; }
+.project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.8; flex: 1; }
+.project-desc li { margin-left: 1.1rem; margin-top: 0.35rem; }
+.project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+.stack-tag { background: #0d1f3c; color: #4d9fff; font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; border-radius: 99px; }
+.project-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.85rem; font-weight: 600; color: var(--accent);
+  text-decoration: none; margin-top: 1.3rem; transition: gap 0.2s;
+}
+.project-link:hover { gap: 0.7rem; }
+
+/* ─── CERTIFICATES ─── */
+.certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.cert-card {
+  background: #111111; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.4rem;
+  display: flex; align-items: flex-start; gap: 1rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.cert-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+.cert-icon {
+  width: 40px; height: 40px; min-width: 40px; border-radius: 10px;
+  background: #0d1f3c; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+}
+.cert-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+.cert-issuer { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+.cert-link { display: inline-block; margin-top: 0.5rem; font-size: 0.76rem; font-weight: 600; color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+.cert-link:hover { opacity: 0.7; }
+
+/* ─── ACHIEVEMENTS ─── */
+#achievements { background: #111111; }
+.achievements-list { display: flex; flex-direction: column; gap: 1rem; list-style: none; }
+.achievement-item {
+  display: flex; align-items: flex-start; gap: 1.2rem;
+  background: #0a0a0a; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.3rem 1.5rem;
+  font-size: 0.95rem; color: var(--muted);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.achievement-item:hover { transform: translateX(4px); box-shadow: 0 4px 16px rgba(77,159,255,0.1); }
+.ach-num { font-family: var(--serif); font-size: 1.5rem; color: var(--accent); line-height: 1; min-width: 28px; }
+
+/* ─── CONTACT ─── */
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.contact-text { font-size: 1rem; color: var(--muted); line-height: 1.85; }
+.contact-text p + p { margin-top: 1rem; }
+.contact-links { display: flex; flex-direction: column; gap: 0.9rem; }
+.contact-link {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.4rem; background: #111111; border: 1px solid var(--border);
+  border-radius: var(--radius); text-decoration: none; color: var(--text);
+  font-size: 0.9rem; font-weight: 500;
+  transition: border-color 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateX(5px); box-shadow: 0 4px 16px rgba(77,159,255,0.2); }
+.contact-link-label { font-size: 0.72rem; color: var(--muted); display: block; margin-top: 0.1rem; font-weight: 400; }
+.contact-icon { width: 38px; height: 38px; min-width: 38px; border-radius: 10px; background: #0d1f3c; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+
+/* FOOTER */
+footer { text-align: center; padding: 2rem; font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  section { padding: 4rem 0; }
+  .hero-inner { flex-direction: column-reverse; gap: 2.5rem; }
+  .hero-photo-wrap { width: 240px; height: 240px; }
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+}
+</style>
+</head>
 <body>
 
-<h1>Ankit Raj</h1>
-<p>Data Science | DevOps</p>
+<nav>
+  <div class="nav-logo">Ankit Raj</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certs">Certificates</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-<h2>About Me</h2>
-<p>I am a BTech Data Science student interested in Artificial Intelligence, Machine Learning and Data Science.</p>
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-greeting">Hello, I'm</div>
+        <h1 class="hero-name">Ankit<br/><span>Raj</span></h1>
+        <p class="hero-role">B.Tech CSE student working on scalable tech solutions — combining data science and development skills to build practical and impactful applications.</p>
+        <div class="hero-btns">
+          <!-- Replace YOUR_CV_LINK with your actual CV link -->
+          <a href="YOUR_CV_LINK" target="_blank" class="btn-primary">View CV</a>
+          <a href="#contact" class="btn-outline">Get In Touch</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num">150+</div>
+            <div class="stat-label">Problems Solved</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">7.85</div>
+            <div class="stat-label">CGPA at LPU</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">5+</div>
+            <div class="stat-label">Certifications</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">4★</div>
+            <div class="stat-label">HackerRank Python</div>
+          </div>
+        </div>
+      </div>
 
-<h2>Projects</h2>
-<ul>
-<li>Agricultural Yield Prediction</li>
-<li>Cultural Bot</li>
-<li>Math Chatbot</li>
-</ul>
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-bg"></div>
+        <!-- Replace img.jpeg with your actual photo filename once you put it in the same folder -->
+        <img src="img.jpeg" alt="Ankit Raj" class="hero-photo"/>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h2>Contact</h2>
-<p>Email: ankitraj926272@gmail.com</p>
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="tag">About Me</div>
+    <h2 class="section-title">Who I <em>Am</em></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a Computer Science Engineering student at Lovely Professional University, Phagwara with a CGPA of 7.85. I love building things that bridge data and the web — from predictive analytics models to full-stack management systems.</p>
+        <p>My toolkit spans Python-based data science, Java backend development, and modern frontend technologies. I'm a hands-on learner who backs every concept with real projects and certifications.</p>
+        <p>Outside academics, I enjoy competitive programming — I've solved 150+ problems on LeetCode & HackerRank and hold a 4-star Python rating on HackerRank.</p>
+      </div>
+      <div>
+        <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">Education</p>
+        <div class="edu-list">
+          <div class="edu-card">
+            <div class="edu-degree">B.Tech — Computer Science & Engineering</div>
+            <div class="edu-school">Lovely Professional University, Phagwara</div>
+            <div class="edu-meta">Aug 2023 – Present &nbsp;·&nbsp; CGPA: 7.85</div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-degree">Intermediate (Class XII)</div>
+            <div class="edu-school">National Public School, Gaya</div>
+            <div class="edu-meta">2020 – 2022 &nbsp;·&nbsp; 72.2%</div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-degree">Matriculation (Class X)</div>
+            <div class="edu-school">National Public School, Gaya</div>
+            <div class="edu-meta">2019 – 2020 &nbsp;·&nbsp; 84.4%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-</body>
-</html>
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="tag">Skills</div>
+    <h2 class="section-title">My Tech <em>Stack</em></h2>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <div class="skill-cat-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Java</span><span class="skill-tag">Python</span>
+          <span class="skill-tag">C</span><span class="skill-tag">C++</span>
+          <span class="skill-tag">JavaScript</span><span class="skill-tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Data Science</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span>
+          <span class="skill-tag">Matplotlib</span><span class="skill-tag">Seaborn</span>
+          <span class="skill-tag">Scikit-learn</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Web Technologies</div>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span>
+          <span class="skill-tag">React</span><span class="skill-tag">Tailwind CSS</span>
+          <span class="skill-tag">Bootstrap</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Tools & Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">GitHub</span><span class="skill-tag">AWS</span>
+          <span class="skill-tag">Power BI</span><span class="skill-tag">MySQL</span>
+          <span class="skill-tag">Jupyter</span><span class="skill-tag">Excel</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">CS Fundamentals</div>
+        <div class="skill-tags">
+          <span class="skill-tag">DSA</span><span class="skill-tag">OOP</span>
+          <span class="skill-tag">OS</span><span class="skill-tag">DBMS</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Soft Skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Analytical Thinking</span><span class="skill-tag">Problem Solving</span>
+          <span class="skill-tag">Leadership</span><span class="skill-tag">Adaptability</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="tag">Projects</div>
+    <h2 class="section-title">What I've <em>Built</em></h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-date">November 2025</div>
+        <div class="project-title">Predictive Analytics on US Chronic Disease Indicators</div>
+        <ul class="project-desc">
+          <li>Preprocessing & EDA on 300K+ CDC health records to identify state-level disease trends.</li>
+          <li>Built regression & classification models evaluated with RMSE, R², Accuracy, F1-Score.</li>
+          <li>Applied clustering & PCA for dimensionality reduction and state grouping.</li>
+          <li>Designed a custom Health Risk Index to rank high-risk states.</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span><span class="stack-tag">Scikit-learn</span>
+          <span class="stack-tag">Pandas</span><span class="stack-tag">Matplotlib</span>
+          <span class="stack-tag">Seaborn</span>
+        </div>
+        <a href="https://github.com/AnkitRaj263/usChronicDiseaseIndicators" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+      <div class="project-card">
+        <div class="project-date">September 2025</div>
+        <div class="project-title">Attendance Pattern Detector</div>
+        <ul class="project-desc">
+          <li>Full-stack attendance management system with complete CRUD functionality.</li>
+          <li>Processed 2,000+ records with automated percentage calculation and threshold-based flagging (&lt;75%).</li>
+          <li>Rule-based detection for irregular students and dynamic report generation.</li>
+          <li>Optimized SQL queries for improved data retrieval efficiency.</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">Java Servlet</span><span class="stack-tag">JDBC</span>
+          <span class="stack-tag">MySQL</span><span class="stack-tag">HTML/CSS/JS</span>
+          <span class="stack-tag">Bootstrap</span>
+        </div>
+        <a href="https://github.com/AnkitRaj263/AttendancePatternDetector" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certs">
+  <div class="container">
+    <div class="tag">Certificates</div>
+    <h2 class="section-title">My <em>Certificates</em></h2>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-icon">☁️</div>
+        <div>
+          <div class="cert-name">Cloud Computing</div>
+          <div class="cert-issuer">NPTEL · Nov 2025</div>
+          <a href="https://drive.google.com/file/d/1HqF-kUOxZAEgPsARdT25pa_Al6-Lhnvk/view?usp=sharing" target="_blank" class="cert-link">View Certificate →</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🌐</div>
+        <div>
+          <div class="cert-name">Full Stack Web Development</div>
+          <div class="cert-issuer">Apna College · Oct 2025</div>
+          <a href="https://drive.google.com/file/d/1CTSc7Yqc-Qkwdc4ZNNtZrG7nlVfPpu7L/view?usp=sharing" target="_blank" class="cert-link">View Certificate →</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">☕</div>
+        <div>
+          <div class="cert-name">DSA with Java</div>
+          <div class="cert-issuer">Apna College · Sep 2025</div>
+          <a href="https://drive.google.com/file/d/16_OEpiwczdJANOEi8RRcnzZPyn7O4-8V/view?usp=sharing" target="_blank" class="cert-link">View Certificate →</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🔷</div>
+        <div>
+          <div class="cert-name">Object Oriented Programming</div>
+          <div class="cert-issuer">iamneo · Dec 2024</div>
+          <a href="https://drive.google.com/file/d/1SnL4Jm_E0txdo4EDp23Vl7KTWUk_nrue/view?usp=sharing" target="_blank" class="cert-link">View Certificate →</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">⚙️</div>
+        <div>
+          <div class="cert-name">DSA with C++</div>
+          <div class="cert-issuer">iamneo · Dec 2024</div>
+          <a href="https://drive.google.com/file/d/19JTqKRJGQ1S01qg42liqw9LIE4xD5iFn/view?usp=sharing" target="_blank" class="cert-link">View Certificate →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="container">
+    <div class="tag">Achievements</div>
+    <h2 class="section-title">My <em>Achievements</em></h2>
+    <ul class="achievements-list">
+      <li class="achievement-item">
+        <span class="ach-num">01</span>
+        Solved 150+ coding problems on LeetCode & HackerRank, sharpening DSA and algorithmic problem-solving skills.
+      </li>
+      <li class="achievement-item">
+        <span class="ach-num">02</span>
+        Earned 4-star in Python and 3-star in C++ on HackerRank platform.
+      </li>
+      <li class="achievement-item">
+        <span class="ach-num">03</span>
+        Completed Skill Development Course at LPU's Centre for Professional Enhancement (Jun–Jul 2025), focusing on logical building, DSA, and programming in C, C++, and Java.
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="tag">Contact</div>
+    <h2 class="section-title">Let's <em>Connect</em></h2>
+    <div class="contact-wrap">
+      <div class="contact-text">
+        <p>I'm currently open to internship opportunities, project collaborations, and interesting conversations about tech.</p>
+        <p>Whether you have a question or just want to say hi — my inbox is always open!</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:ankitraj926272@gmail.com" class="contact-link">
+          <div class="contact-icon">✉️</div>
+          <div><span>ankitraj926272@gmail.com</span><span class="contact-link-label">Email</span></div>
+        </a>
+        <a href="https://www.linkedin.com/in/ankit-raj-103287266/" target="_blank" class="contact-link">
+          <div class="contact-icon">💼</div>
+          <div><span>linkedin.com/in/ankit-raj</span><span class="contact-link-label">LinkedIn</span></div>
+        </a>
+        <a href="https://github.com/AnkitRaj263" target="_blank" class="contact-link">
+          <div class="contact-icon">🐙</div>
+          <div><span>github.com/AnkitRaj263</span><span class="contact-link-label">GitHub</span></div>
+        </a>
+        <a href="tel:+919341917326" class="contact-link">
+          <div class="contact-icon">📱</div>
+          <div><span>+91 9341917326</span><span class="contact-link-label">Phone</span></div>
+        </a>
+
+        
